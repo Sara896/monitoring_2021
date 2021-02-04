@@ -41,3 +41,15 @@ pairs(meuse)
 
 #pairing only the element part of the variables
 pairs(cadmium, copper, lead, zinc)
+cpairs(~cadmium + copper + lead + zinc, data=meuse) 
+pairs(~cadmium + copper + lead + zinc, data=meuse, col="green") 
+
+#change symbol to filled triangle
+pairs(~cadmium + copper + lead + zinc, data=meuse, col="green", pch=17) 
+
+
+#increas the size of the charactrs
+pairs(~cadmium + copper + lead + zinc, data=meuse, col="green", pch=17, cex=5
+     )
+pairs(~cadmium + copper + lead + zinc, data=meuse, col="green", pch=17, cex=3
+     )
