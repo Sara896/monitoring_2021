@@ -26,3 +26,40 @@ bubble(meuse, "zinc")
 #do the same for lead and change color
 bubbles(meuse, "lead", col="red")
 #zinc and lead can't be overlapped
+
+#ecological dataframe
+#prendiamo dati inventati come esempio
+#biofuels
+#built a new set
+biofuels <- c(120, 200, 350, 570, 750) #array of values: c
+#oxydative enzimes
+oxydative <- c(1200, 1300, 21000, 34000,50000)
+s<-data.fame(biofuels,oxydative)
+s<-data.frame(biofuels, oxydative)
+
+ggplot(s, aes(x= biofuels, y= oxydative))
+ggplot2(s, aes(x= biofuels, y= oxydative))  
+
+#we have to esxplai n that we are adding a geometry (a function) 
+geaom_point
+ggplot2(s, aes(x= biofuels, y= oxydative))+ eaom_point()
+#to change the propriety of the table
+ggplot(s, aes(x= biofuels, y= oxydative))+ geom_point(size=2, col="blue") + geom_line()
+
+#to add lines to the graph
+ggplot(s, aes(x= biofuels, y= oxydative))+ geom_point(size=2, col="blue") + geom_line()
+
+)
+
+#polygon
+ggplot(s, aes(x= biofuels, y= oxydative))+ geom_polygon()
+
+
+#######IMPORT DATA°°°°°°°°
+#SET TH WORKING DIRECTORING (IMPORT AND ESPORT DATA)
+
+setwd("C:\Users\Enrico Pisani\Desktop\GCE & SDG")
+
+setwd("C:/Users/Enrico Pisani/Desktop/GCE & SDG")
+
+a
