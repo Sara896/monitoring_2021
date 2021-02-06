@@ -59,7 +59,21 @@ ggplot(s, aes(x= biofuels, y= oxydative))+ geom_polygon()
 #SET TH WORKING DIRECTORING (IMPORT AND ESPORT DATA)
 
 setwd("C:\Users\Enrico Pisani\Desktop\GCE & SDG")
+#salvare data in acer
+setwd("C:/lab/")
+#per leggere la tabella dei dati covid
+covid<- read.table("covid_agg.csv", header=TRUE)
+#per vedere se funziona
+covid
+#per vedere solo prime 6 righe
+head(covid)
 
-setwd("C:/Users/Enrico Pisani/Desktop/GCE & SDG")
+summary(covid)
 
-a
+#ggplot
+library(ggplot2)
+ggplot(covid, aes(x= lon, y= lat))+ geom_point() 
+
+#change the size of the points according to the number of cases
+ggplot(covid, aes(x= lon, y= lat, size= cases))+ geom_point() 
+
