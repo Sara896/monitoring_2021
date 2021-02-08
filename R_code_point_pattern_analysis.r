@@ -94,7 +94,43 @@ plot(density_map)
 points(leo_ppp)
 
 
+########Interpolation of rtudents data###########
+setwd("C:/lab/")
+load("point_pattern_analysis.RData")
+#to see the list of elements
+ls()
+#explain to R the variable we want to interpolate
+attach(leo)
+marks(leo_ppp)<-chlh
+
+#use the smooth function to interpolate
+chlh_map<- Smooth(leo_ppp)
+cl<- colorRampPalette(c('yellow', 'magenta', 'blue', 'green'))(100)
+plot(chlh_map, col=cl)
+points(leo_ppp)
                   
                  
+#ex do the same dor chls in sediment (chls)
+marks(leo_ppp)<-chls
 
+#use the smooth function to interpolate
+chls_map<- Smooth(leo_ppp)
+cl<- colorRampPalette(c('yellow', 'magenta', 'blue', 'green'))(100)
+plot(chls_map, col=cl)
+points(leo_ppp)
 
+#multipanel
+par(mfrow=c(1,3))
+plot(density_map, cik=cl)
+points(leo_ppp)
+
+#second grapg
+plot(chlh_map, col=cl)
+points(leo_ppp)
+
+#third map
+plot(chls_map, col=cl)
+points(leo_ppp)
+
+#ex, do a multipanel with 3 raws and 1 colon
+par(mfrow=c(3,1))
