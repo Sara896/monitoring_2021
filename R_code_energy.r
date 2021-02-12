@@ -47,3 +47,12 @@ ext <- c(0,20,35,55)  # xmin xmax ymin ymax
 copNDVI_Italy <- crop(copNDVI, ext)
 plot(copNDVI_Italy, col=clymax)
 
+
+library(RStoolbox)
+ 
+setwd("C:/lab/")
+
+setwd("C:/lab/")
+
+
+defor1 <- brick("defor1_.jpg")  
