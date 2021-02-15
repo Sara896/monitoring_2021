@@ -94,3 +94,20 @@ plot(difdvi)
 cldif <- colorRampPalette(c('blue','white','red'))(100) 
 plot(difdvi, col=cldif, main="amount of energy lost!")
 
+hist(difdvi, col="red")#to see an istogram of the values
+####### final par!
+# defor1
+# defor2
+# dvi1
+# dvi2
+# difdvi
+# histogram
+
+par(mfrow=c(3,2))
+plotRGB(defor1, r=1, g=2, b=3, stretch="Lin")
+plotRGB(defor2, r=1, g=2, b=3, stretch="Lin")
+plot(dvi1, col=cl, main="biomass before cut")
+plot(dvi2, col=cl, main="biomass after cut")
+plot(difdvi, col=cldif, main="amount of energy lost!")
+hist(difdvi, col="red")
+
