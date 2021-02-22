@@ -2,10 +2,33 @@
 
 ###TEMPERATURE DATA
 ##https://land.copernicus.vgt.vito.be/PDF/portal/Application.html#Browse;Root=1000101;Collection=29870072;DoSearch=true;Time=NORMAL,NORMAL,1,JANUARY,2006,31,DECEMBER,2022
-#11/01/2011_12.30/13.30
-#11/08/2011_12.30/13.30
-#11/01/2020_12.30/13.30
-#11/08/2020_12.30/13.30
+#11-20/01/20
+#to let R work with raster files
+library(raster)
+# to read the copernicus data in .nc format 
+library(ncdf4)
+##################################10-daily LST Daily Cycle Global V1 (142 products)	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# set the working directory
+setwd("C:/lab/")
+t_0120 <- raster("LST012020.nc")
+t_0820 <- raster("LST082020.nc")
+#to change the map colors
+clt <- colorRampPalette(c('blue','yellow','red'))(100)
+#crop Italy
+ext <- c(0,20,35,48)
+t_0120_it<- crop (t_0120, ext)
+plot(t_0120_it, col=clt, main="LST january 2020")
+t_0820_it<- crop (t_0820, ext)
+plot(t_0820_it, col=clt, main="LST august 2020")
+
+#to compare the images
+par(mfrow=c(1,2))
+plot(t_0120_it)
+plot(t_0820_it)
+
+f <- raster("c_gls_LST_202001221400_GLOBE_GEO_V1.2.1.nc")
+
+
 
 ###VEGETATION DATA
 https://neo.sci.gsfc.nasa.gov/archive/gs/MOD_NDVI_M/
