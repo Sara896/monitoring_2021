@@ -170,6 +170,23 @@ plot(vfc1119, main="FCover november 2019")
 plot(difN19, main= "variazione NDVI 2019")
 plot(diffc19, main= "variazione FCover 2019")
 
+#I want to do a match between the different NDVI changes
+
+par(mfrow=c(3,2)) #3 rows and 2 columns
+plot(vN1018, main="NDVI october 2018")
+plot(vN1118, main="NDVI november 2018")
+plot(vN1017, main="NDVI october 2017")
+plot(vN1117, main="NDVI november 2017")
+plot(vN1019, main="NDVI october 2019")
+plot(vN1119, main="NDVI november 2019")
+
+library(rgdal)
+par(mfrow=c(3,1))
+levelplot(difN, main= "variazione NDVI 2018")
+levelplot(difN17, main= "variazione NDVI 2017")
+levelplot(difN19, main= "variazione NDVI 2019")
+
+
 
 
 
