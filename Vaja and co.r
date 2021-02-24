@@ -203,11 +203,32 @@ levelplot(difN, main= "variazione NDVI 2018")
 levelplot(difN17, main= "variazione NDVI 2017")
 levelplot(difN19, main= "variazione NDVI 2019")
 
+######prove giugno
+provn18<-raster("c_gls_NDVI_201806010000_GLOBE_PROBAV_V2.2.1.nc")
+provn19<-raster("c_gls_NDVI_201906010000_GLOBE_PROBAV_V2.2.1.nc")
+provf18<-raster("c_gls_FCOVER_201806230000_GLOBE_PROBAV_V1.5.1.nc")
+provf19<-raster("c_gls_FCOVER_201906230000_GLOBE_PROBAV_V1.5.1.nc")
+vprovn18<-crop(provn18,ext)
+vprovn19<-crop(provn19,ext)
+vprovf18<-crop(provf18,ext)
+vprovf19<-crop(provf19,ext)
 
+par(mfrow=c(2,2))
+plot(vprovn18,main="NDVI june 2018")
+plot(vprovn19,main="NDVI june 2019")
+plot(vprovf18,main="NDVI june 2018")
+plot(vprovf19,main=main="NDVI june2019")
 
+par(mfrow=c(2,2)) #3 rows and 2 columns
+plot(vN1019, main="NDVI october 2019")
+plot(vN1119, main="NDVI november 2019")
+plot(vfc1019, main="FCover october 2019")
+plot(vfc1119, main="FCover november 2019")
 
-
-
+plot(vN1018,  main="NDVI october 2018")
+plot(vN1118, main="NDVI november 2018")
+plot(vfc1018, main="FCover october 2018")
+plot(vfc1118, main="FCover november 2018")
 
 
 
