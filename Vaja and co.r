@@ -31,9 +31,9 @@ library(scico)
 scico_palette_show()#to see the palette
 scico(10, palette = 'bamako') # to see 10 colors in the choosen palette
 #to set the colors of the maps
-cNDVI<-colorRampPalette(c("#FFE599","#EFD67A","#DFC55B", "#CBB33A","#AE9D1A" "#929104","#7A8B05" ,"#647F12", "#53751B", "#436A25"))(100)
-cFCOVER<-colorRampPalette(c('beige', 'butleywood', 'palegreen', 'green', 'forestgreen'))(100)
-cdif<- colorRampPalette(c('green4', 'beige', 'yellow'))(100)# I put green as first beacause it means that the vegetation is in a better condition,
+cNDVI<-colorRampPalette(c("#FFE599","#EFD67A","#DFC55B", "#CBB33A","#AE9D1A", "#929104","#7A8B05" ,"#647F12", "#53751B", "#436A25"))(100)
+cFCOVER<-colorRampPalette(c('beige', 'burlywood', 'palegreen', 'green', 'forestgreen'))(100)
+cdif<- colorRampPalette(c('green4', 'seagreen4','dodgerblue','gold', 'yellow'))(100)# I put green as first beacause it means that the vegetation is in a better condition,
 #nd the yellow on the top to avidence the values where the difference in NDVI is higher so the vegetation is in a worst condition
                              
                              
@@ -93,13 +93,9 @@ par(mfrow=c(3,2)) #3 rows and 2 columns
 plot(vN1018, col=cNDVI, main="NDVI october 2018")
 plot(vN1118, col=cNDVI, main="NDVI november 2018")
 plot(vfc1018, col=cFCOVER, main="FCover october 2018")
-plot(vfc1118, main="FCover november 2018")
-plot(difN, main= "variazione NDVI 2018")
-plot(diffc, main= "variazione FCover 2018")
-
-
-
-
+plot(vfc1118, col=cFCOVER, main="FCover november 2018")
+plot(difN, col=cdif, main="variazione NDVI 2018")
+plot(diffc, col=cdif, main="variazione FCover 2018")
 
 
 #####################  2017 ###################################
