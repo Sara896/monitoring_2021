@@ -33,7 +33,9 @@ scico(10, palette = 'bamako') # to see 10 colors in the choosen palette
 #to set the colors of the maps
 cNDVI<-colorRampPalette(c("#FFE599","#EFD67A","#DFC55B", "#CBB33A","#AE9D1A", "#929104","#7A8B05" ,"#647F12", "#53751B", "#436A25"))(100)
 cFCOVER<-colorRampPalette(c('beige', 'burlywood', 'palegreen', 'green', 'forestgreen'))(100)
-cdif<- colorRampPalette(c('green4', 'seagreen4','dodgerblue','gold', 'yellow'))(100)# I put green as first beacause it means that the vegetation is in a better condition,
+cdif<- colorRampPalette(c('black','darkmagenta', 'pink', 'yellow', 'lightsalmon'))(100)
+> levelplot(difN, col=cl)
+# I put green as first beacause it means that the vegetation is in a better condition,
 #nd the yellow on the top to avidence the values where the difference in NDVI is higher so the vegetation is in a worst condition
                              
                              
@@ -60,23 +62,31 @@ N1118<-raster("c_gls_NDVI_201811110000_GLOBE_PROBAV_V2.2.1.nc")
 #we zoom on our interested area, Veneto Region
 #to set the coordinates
 est<-c(11, 14, 45, 47)
-ext<-c(5,16,44,49)
-
+ert<-c(5,16,44,49)
+ext<-c(10,13.5,44,47)
 
 #to crop the images
 vN1018<-crop(N1018, ext)
 vN1118<-crop(N1118, ext)
 
-######if I want to plot the coastline map
+#######if I want to plot the coastline map#################### non ha senso metterlo que!
 library(rgdal)
 coastlines <-readOGR("ne_10m_coastline.shp")
 plot(coastlines, add = TRUE)
 
 #how the NDVIis is changed from october to november 2018
 difN<- vN1018-vN1118
+par(mfrow=c(1,2))
+plot(difN, col=cdif)
+hist(difN, col='green') #to do an istrogramm which plot the frquency of the values,how much pixel have one value?
+
+dev.off() # to cancel the graphs and them settings, let use create nez graphs with new settings
+
+levelplot(difN) # to do graphs around the map showing the mean frequences of the values along considered latitude and longitude
 
 
 #to see the differences in cover vegetation
+#used data:
 #FCOVER-----FCOVER 1km Global V1
 # FCOVER_201810030000_GLOBE_PROBAV_V1.5.1	15/09/2018	15/10/2018
 #	FCOVER_201811230000_GLOBE_PROBAV_V1.5.1	05/11/2018	05/12/2018
@@ -88,6 +98,11 @@ vfc1018<- crop(fc1018, ext)
 vfc1118<- crop(fc1118, ext)
 
 diffc <- vfc1018-vfc1118
+par(mfrow=c(1,2))
+plot(diffc, col=cdif)
+hist(diffc, col='blue') #to do an istrogramm which plot the frquency of the values,how much pixel have one value?
+dev.off()
+levelplot(diffc) # 
 
 par(mfrow=c(3,2)) #3 rows and 2 columns
 plot(vN1018, col=cNDVI, main="NDVI october 2018")
@@ -123,6 +138,11 @@ plot(coastlines, add = TRUE)
 
 #how the NDVIis is changed from october to november 2018
 difN17<- vN1017-vN1117
+par(mfrow=c(1,2))
+plot(difN17, col=cdif)
+hist(difN17, col='green') #to do an istrogramm which plot the frquency of the values,how much pixel have one value?
+dev.off()
+levelplot(difN17) 
 
 
 #to see the differences in cover vegetation
@@ -133,7 +153,11 @@ vfc1017<- crop(fc1017, ext)
 vfc1117<- crop(fc1117, ext)
 
 diffc17 <- vfc1017-vfc1117
-
+par(mfrow=c(1,2))
+plot(diffc17, col=cdif)
+hist(diffc17, col='green') #to do an istrogramm which plot the frquency of the values,how much pixel have one value?
+dev.off()
+levelplot(difN17) 
 
 par(mfrow=c(3,2)) #3 rows and 2 columns
 plot(vN1017, main="NDVI october 2017")
@@ -142,6 +166,8 @@ plot(vfc1017, main="FCover october 2017")
 plot(vfc1117, main="FCover november 2017")
 plot(difN17, main= "variazione NDVI 2017")
 plot(diffc17, main= "variazione FCover 2017")
+
+dev.off()
 
 
 
@@ -167,6 +193,11 @@ vN1119<-crop(N1119, ext)
 
 #how the NDVIis is changed from october to november 2018
 difN19<- vN1019-vN1119
+par(mfrow=c(1,2))
+plot(difN19, col=cdif)
+hist(difN19, col='green') #to do an istrogramm which plot the frquency of the values,how much pixel have one value?
+dev.off()
+levelplot(difN19) 
 
 
 #to see the differences in cover vegetation
@@ -177,6 +208,11 @@ vfc1019<- crop(fc1019, ext)
 vfc1119<- crop(fc1119, ext)
 
 diffc19 <- vfc1019-vfc1119
+par(mfrow=c(1,2))
+plot(diffc19, col=cdif)
+hist(diffc19, col='green') #to do an istrogramm which plot the frquency of the values,how much pixel have one value?
+dev.off()
+levelplot(difN19)  
 
 
 par(mfrow=c(3,2)) #3 rows and 2 columns
@@ -190,12 +226,12 @@ plot(diffc19, main= "variazione FCover 2019")
 #I want to do a match between the different NDVI changes
 
 par(mfrow=c(3,2)) #3 rows and 2 columns
-plot(vN1018, main="NDVI october 2018")
-plot(vN1118, main="NDVI november 2018")
-plot(vN1017, main="NDVI october 2017")
-plot(vN1117, main="NDVI november 2017")
-plot(vN1019, main="NDVI october 2019")
-plot(vN1119, main="NDVI november 2019")
+plot(vN1017, col=cNDVI, main="NDVI october 2017")
+plot(vN1117, col=cNDVI, main="NDVI november 2017")
+plot(vN1018, col=cNDVI, main="NDVI october 2018")
+plot(vN1118, col=cNDVI, main="NDVI november 2018")
+plot(vN1019, col=cNDVI, main="NDVI october 2019")
+plot(vN1119, col=cNDVI, main="NDVI november 2019")
 
 library(rgdal)
 par(mfrow=c(3,1))
@@ -204,21 +240,42 @@ levelplot(difN17, main= "variazione NDVI 2017")
 levelplot(difN19, main= "variazione NDVI 2019")
 
 ######prove giugno
-provn18<-raster("c_gls_NDVI_201806010000_GLOBE_PROBAV_V2.2.1.nc")
-provn19<-raster("c_gls_NDVI_201906010000_GLOBE_PROBAV_V2.2.1.nc")
-provf18<-raster("c_gls_FCOVER_201806230000_GLOBE_PROBAV_V1.5.1.nc")
-provf19<-raster("c_gls_FCOVER_201906230000_GLOBE_PROBAV_V1.5.1.nc")
-vprovn18<-crop(provn18,ext)
-vprovn19<-crop(provn19,ext)
-vprovf18<-crop(provf18,ext)
-vprovf19<-crop(provf19,ext)
+n0618<-raster("c_gls_NDVI_201806010000_GLOBE_PROBAV_V2.2.1.nc")
+n0619<-raster("c_gls_NDVI_201906010000_GLOBE_PROBAV_V2.2.1.nc")
+f0618<-raster("c_gls_FCOVER_201806230000_GLOBE_PROBAV_V1.5.1.nc")
+f0619<-raster("c_gls_FCOVER_201906230000_GLOBE_PROBAV_V1.5.1.nc")
+vn0618<-crop(n0618,ext)
+vn0619<-crop(n0619,ext)
+vf0618<-crop(f0618,ext)
+vf0619<-crop(f0619,ext)
+
+
 
 par(mfrow=c(2,2))
-plot(vprovn18,main="NDVI june 2018")
-plot(vprovn19,main="NDVI june 2019")
-plot(vprovf18,main="NDVI june 2018")
-plot(vprovf19,main=main="NDVI june2019")
+plot(vn0618,col=cNDVI,main="NDVI june 2018")
+plot(vn0619,col=cNDVI,main="NDVI june 2019")
+plot(vf0618, col=cFCOVER,main="NDVI june 2018")
+plot(vf0619, col=cFCOVER,main="NDVI june2019")
 
+difN1819 <- vn0618-vn0619
+par(mfrow=c(1,2))
+plot(difN1819, col=cdif)
+hist(difN1819, col='green') #to do an istrogramm which plot the frquency of the values,how much pixel have one value?
+dev.off()
+levelplot(difN1819) 
+
+
+diffc1819 <- vf0618-vf0619
+par(mfrow=c(1,2))
+plot(diffc1819, col=cdif)
+hist(diffc1819, col='green') #to do an istrogramm which plot the frquency of the values,how much pixel have one value?
+dev.off()
+levelplot(difN19)  
+
+par(mfrow=c(1,2))
+plot(vn0618,col=cNDVI,main="NDVI june 2018")
+plot(vn0619,col=cNDVI,main="NDVI june 2019")
+##############################################################################################   end  ###############################################
 par(mfrow=c(2,2)) #3 rows and 2 columns
 plot(vN1019, main="NDVI october 2019")
 plot(vN1119, main="NDVI november 2019")
