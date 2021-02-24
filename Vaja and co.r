@@ -24,15 +24,33 @@ library(ncdf4)
 #to plot graphics of the NDVI
 library(rasterVis) #to use the function : levelplot
 
+#for the NDVI maps I have choosen a colour rampalette whichi is :Perceptually uniform, Perceptually ordered and Colour­vision­deficiency (CVD) friendly
+#http://www.fabiocrameri.ch/colourmap-type.php
+install.packages('scico')
+library(scico)
+scico_palette_show()#to see the palette
+scico(10, palette = 'bamako') # to see 10 colors in the choosen palette
+#to set the colors of the maps
+cNDVI<-colorRampPalette(c("#FFE599","#EFD67A","#DFC55B", "#CBB33A","#AE9D1A" "#929104","#7A8B05" ,"#647F12", "#53751B", "#436A25"))(100)
+cFCOVER<-colorRampPalette(c('beige', 'butleywood', 'palegreen', 'green', 'forestgreen'))(100)
+cdif<- colorRampPalette(c('green4', 'beige', 'yellow'))(100)# I put green as first beacause it means that the vegetation is in a better condition,
+#nd the yellow on the top to avidence the values where the difference in NDVI is higher so the vegetation is in a worst condition
+                             
+                             
 #to set the working directory to upload data into R
 setwd("C:/lab/")
 
-
+####giugno2018  	NDVI_201806010000_GLOBE_PROBAV_V2.2.1	01/06/2018	10/06/2018	
+   #	FCOVER_201806230000_GLOBE_PROBAV_V1.5.1	05/06/2018	05/07/2018	
+  ####giugno 2019  NDVI_201906010000_GLOBE_PROBAV_V2.2.1	01/06/2019	10/06/2019	
+  ##FCOVER_201906230000_GLOBE_PROBAV_V1.5.1	05/06/2019	05/07/2019	
+  
 ###############################     2018    ##################
 # data from: https://land.copernicus.vgt.vito.be/PDF/portal/Application.html#Home
 #Vegetation Indicators - NDVI 1km V2.2 Global
 #NDVI_201810010000_GLOBE_PROBAV_V2.2.1	01/10/2018	10/10/201
 #NDVI_201811110000_GLOBE_PROBAV_V2.2.1	11/11/2018	20/11/2018
+
 
 
 # we use raster function to charge the satellite images
@@ -41,7 +59,9 @@ N1118<-raster("c_gls_NDVI_201811110000_GLOBE_PROBAV_V2.2.1.nc")
 
 #we zoom on our interested area, Veneto Region
 #to set the coordinates
-ext<-c(11, 14, 45, 47)
+est<-c(11, 14, 45, 47)
+ext<-c(5,16,44,49)
+
 
 #to crop the images
 vN1018<-crop(N1018, ext)
@@ -70,12 +90,13 @@ vfc1118<- crop(fc1118, ext)
 diffc <- vfc1018-vfc1118
 
 par(mfrow=c(3,2)) #3 rows and 2 columns
-plot(vN1018, main="NDVI october 2018")
-plot(vN1118, main="NDVI november 2018")
-plot(vfc1018, main="FCover october 2018")
+plot(vN1018, col=cNDVI, main="NDVI october 2018")
+plot(vN1118, col=cNDVI, main="NDVI november 2018")
+plot(vfc1018, col=cFCOVER, main="FCover october 2018")
 plot(vfc1118, main="FCover november 2018")
 plot(difN, main= "variazione NDVI 2018")
 plot(diffc, main= "variazione FCover 2018")
+
 
 
 
