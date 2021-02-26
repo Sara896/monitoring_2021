@@ -14,7 +14,7 @@
 # NDVI for october 2019 and november 2019
 # Fcover for october 2019 and november 2019 
 
-in the end I want to compare NDVI and FCCOVER from june 2018 and june 2019 to avoid problems on remote sensing due to clouds cover
+#in the end I want to compare NDVI and FCCOVER from june 2018 and june 2019 to avoid problems on remote sensing due to clouds cover
 
 
 
@@ -31,7 +31,7 @@ library(RStoolbox)
 library(ncdf4)
 
 #to plot graphs of the calculated values around the maps 
-library(rasterVis) #to use the function : levelplot
+library(rasterVis) #to use the function levelplot
 
                             
                              
@@ -39,7 +39,9 @@ library(rasterVis) #to use the function : levelplot
  
 ###############################     2018    ##################
 
-#I want to compare the NDVI from october to november 2018
+
+
+#first I want to compare the NDVI from october to november 2018
 
 # data from: https://land.copernicus.vgt.vito.be/PDF/portal/Application.html#Home
 #Vegetation Indicators - NDVI 1km V2.2 Global
@@ -149,6 +151,7 @@ plot(diffc, col=cdif, main="variazione FCover 2018")
 #FCOVER_201711230000_GLOBE_PROBAV_V1.5.1	05/11/2017	05/12/201
 #FCOVER_201710030000_GLOBE_PROBAV_V1.5.1	15/09/2017	15/10/201
 
+#I want to compare NDVI and FCOVER from october to november 2017
 
 
 # we use raster function to upload the satellite images
@@ -187,20 +190,15 @@ levelplot(diffc17)
 
 #I want to do a match between the different NDVI changes
 
-par(mfrow=c(3,2)) #3 rows and 2 columns
+par(mfrow=c(2,2)) #3 rows and 2 columns
 plot(vN1017, col=cNDVI, main="NDVI october 2017")
 plot(vN1117, col=cNDVI, main="NDVI november 2017")
 plot(vN1018, col=cNDVI, main="NDVI october 2018")
 plot(vN1118, col=cNDVI, main="NDVI november 2018")
 
 
-library(rgdal)
-par(mfrow=c(3,1))
-levelplot(difN, main= "variazione NDVI 2018")
-levelplot(difN17, main= "variazione NDVI 2017")
-levelplot(difN19, main= "variazione NDVI 2019")
-
-######prove giugno
+###### june ###############
+# how is the vegetation changed from june 2018 to june 2019?
 n0618<-raster("c_gls_NDVI_201806010000_GLOBE_PROBAV_V2.2.1.nc")
 n0619<-raster("c_gls_NDVI_201906010000_GLOBE_PROBAV_V2.2.1.nc")
 f0618<-raster("c_gls_FCOVER_201806230000_GLOBE_PROBAV_V1.5.1.nc")
@@ -214,13 +212,13 @@ vf0619<-crop(f0619,ext)
 par(mfrow=c(2,2))
 plot(vn0618,col=cNDVI,main="NDVI june 2018")
 plot(vn0619,col=cNDVI,main="NDVI june 2019")
-plot(vf0618, col=cFCOVER,main="NDVI june 2018")
-plot(vf0619, col=cFCOVER,main="NDVI june2019")
+plot(vf0618, col=cFCOVER,main="FCOVER june 2018")
+plot(vf0619, col=cFCOVER,main="FCOVER june2019")
 
 difN1819 <- vn0618-vn0619
 par(mfrow=c(1,2))
 plot(difN1819, col=cdif)
-hist(difN1819, col='green') #to do an istrogramm which plot the frquency of the values,how much pixel have one value?
+hist(difN1819, col='springgreen', xlab= 'NDVI variation') 
 dev.off()
 levelplot(difN1819) 
 
@@ -228,15 +226,15 @@ levelplot(difN1819)
 diffc1819 <- vf0618-vf0619
 par(mfrow=c(1,2))
 plot(diffc1819, col=cdif)
-hist(diffc1819, col='green') #to do an istrogramm which plot the frquency of the values,how much pixel have one value?
+hist(diffc1819, col='blue', xlab= 'FCOVER variation') 
 dev.off()
-levelplot(difN19)  
+levelplot(diffc1819)  
 
 par(mfrow=c(1,2))
 plot(vn0618,col=cNDVI,main="NDVI june 2018")
 plot(vn0619,col=cNDVI,main="NDVI june 2019")
 
-####################################JUNE 3000 ààààààààààààààààààààààààààààà
+####################################JUNE 3000 ###################################
 
 NDVI300_201906010000_GLOBE_PROBAV_V1.0.1	01/06/2019	10/06/2019	
 NDVI300_201806010000_GLOBE_PROBAV_V1.0.1	01/06/2018	10/06/2018
@@ -254,28 +252,33 @@ plot(vn0619_300,col=cNDVI,main="NDVI june 2019")
 difN1819_300 <- vn0618_300-vn0619_300
 par(mfrow=c(1,2))
 plot(difN1819_300, col=cdif)
-hist(difN1819_300, col='green, xlab = "NDVI Index Value"') #to do an istrogramm which plot the frquency of the values,how much pixel have one value?
+hist(difN1819_300, col='springgreen', xlab = "NDVI Index Value') #to do an istrogramm which plot the frquency of the values,how much pixel have one value?
 dev.off()
 levelplot(difN1819) 
-cFCOVER<-colorRampPalette(c('beige', 'burlywood', 'yellow', 'green', 'forestgreen'))(100)
 
+######################## zoom more ############
+ext<-c(9.5,14,45,47.5)
 
+vn0618<-crop(n0618,ext)
+vn0619<-crop(n0619,ext)
+vf0618<-crop(f0618,ext)
+vf0619<-crop(f0619,ext)
+
+difN1819 <- vn0618-vn0619
+diffc1819 <- vf0618-vf0619
+
+par(mfrow=c(2,2))
+plot(difN1819, col=cdif)
+hist(difN1819, col='springgreen', xlab= 'NDVI variation') 
+plot(diffc1819, col=cdif)
+hist(diffc1819, col='blue', xlab= 'FCOVER variation') 
+
+levelplot(difN1819, main='NDVI variation') 
+levelplot(diffc1819,main='FCOVER variation')  
 
 ##############################################################################################   end  ###############################################
 
-par(mfrow=c(2,2)) #3 rows and 2 columns
-plot(vN1019, main="NDVI october 2019")
-plot(vN1119, main="NDVI november 2019")
-plot(vfc1019, main="FCover october 2019")
-plot(vfc1119, main="FCover november 2019")
-
-plot(vN1018,  main="NDVI october 2018")
-plot(vN1118, main="NDVI november 2018")
-plot(vfc1018, main="FCover october 2018")
-plot(vfc1118, main="FCover november 2018")
 
 
-
-#we want to change the colours of the map so use the function colorRampalette, puttingig the value of no cover vegetation in yellow to evidence where the vegetation has been damaged
 
 
