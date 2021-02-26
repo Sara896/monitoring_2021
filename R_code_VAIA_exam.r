@@ -1,8 +1,8 @@
 #I want to investigate the effects of the Vaia storm that hit North-eastern Italy on October 27-30th 2018
 #for my study I choose 2 index
 #NDVI 
-
 #FCOVER
+
 #I use satellite imagine from copernicus program provided by ESA, sensor SPOT-VGT, PROBA-V with a resolution of 1 Km
 # 
 # compare NDVI for october 2018 and november 2018 
@@ -10,9 +10,6 @@
 
 # NDVI for october 2017 and november 2017 
 # FCOVER for october  2017 and november 2017
-
-# NDVI for october 2019 and november 2019
-# Fcover for october 2019 and november 2019 
 
 #in the end I want to compare NDVI and FCCOVER from june 2018 and june 2019 to avoid problems on remote sensing due to clouds cover
 
